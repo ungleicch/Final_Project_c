@@ -3,36 +3,36 @@
 #include <ostream>
 
 
-
-void get_rows(bool (&arr)[15][30], int arr2[2] = nullptr) {
-    std::fstream file("SeatAvailability.txt");
-    if(!file){
-        std::ofstream outFile("SeatAvailability.txt");
-        if(!outFile) {
-            std::cerr << "There was an error, not able to provide the file!" << std::endl;
-            return;
+// request / update the file
+void get_data(bool (&arr)[15][30], int arr2[2] = nullptr) { // taking a reference of the 2D array, and if we change a seat a 1D array of the place.
+    std::fstream file("SeatAvailability.txt", std::ios::in | std::ios::out); // setting the file
+    if(!file){ // if file is not loaded, not there yet
+        std::ofstream outFile("SeatAvailability.txt", std::ios::trunc); // create file, with writing in rights
+        if(!outFile) { // if file was not able to be created
+            std::cerr << "There was an error, not able to provide the file!" << std::endl; // error
+            return; // end the get_data
         }
 
-        for(int i = 0; i < 15; i++){
+        for(int i = 0; i < 15; i++){ // filling the new file with 0 for each seat.
             for(int j = 0; j < 30; j++){
                 arr[i][j] = 0;
-                outFile << "0";
+                outFile << "0 ";
             }
-            outFile << "\n";
+            outFile << "\n"; // new line
         }
 
-        outFile.close();
-        file.open("SeatAvailability.txt", std::ios::in | std::ios::out);
+        outFile.close(); // closing the file for writing, after also creating it.
+        file.open("SeatAvailability.txt", std::ios::in | std::ios::out); // open the file with reading and writing rights.
         if(!file){
-            std::cerr << "Not able to open the file!!" << std::endl;
-            return;
+            std::cerr << "Not able to open the file!!" << std::endl; // Error if we are not able to open the file.
+            return; // end the fuction.
         }
     }
 
-    for (int i = 0; i < 15; i++){
+    for (int i = 0; i < 15; i++){ // the file exists, reading the values into the refrence array.
         for(int j = 0; j < 30; j++){
             int value;
-            file >> value;
+            file >> value; // char by char reading in the values
             arr[i][j] = (value != 0);
         }
     }
@@ -42,7 +42,7 @@ void get_rows(bool (&arr)[15][30], int arr2[2] = nullptr) {
         int col = arr2[1] - 1;
 
         if (row < 0 || row >= 15 || col < 0 || col >= 30) {
-            std:: cerr << "Invalid row or colum indext!" << std::endl;
+            std:: cerr << "Invalid row or colum index!" << std::endl;
             file.close();
             return;
         }
@@ -50,7 +50,7 @@ void get_rows(bool (&arr)[15][30], int arr2[2] = nullptr) {
         arr[row][col] = 1;
         file.close();
 
-        std::ofstream outFile("SeatAvailability.txt");
+        std::ofstream outFile("SeatAvailability.txt", std::ios::trunc);
         if(!outFile){
             std::cerr << "Error opening the file for changing the value!" << std::endl;
             return;
@@ -72,7 +72,7 @@ void get_rows(bool (&arr)[15][30], int arr2[2] = nullptr) {
 int main(){
     bool seats[15][30];
     int seatToMark[2] = {2, 5};
-    get_rows(seats, seatToMark);
+    get_data(seats, seatToMark);
 
 
     return 0;
