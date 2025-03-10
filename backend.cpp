@@ -4,13 +4,13 @@
 
 
 // request / update the file
-void get_data(bool (&arr)[15][30], int arr2[2] = nullptr) { // taking a reference of the 2D array, and if we change a seat a 1D array of the place.
+int get_data(bool (&arr)[15][30], int arr2[2] = nullptr) { // taking a reference of the 2D array, and if we change a seat a 1D array of the place.
     std::fstream file("SeatAvailability.txt", std::ios::in | std::ios::out); // setting the file
     if(!file){ // if file is not loaded, not there yet
         std::ofstream outFile("SeatAvailability.txt", std::ios::trunc); // create file, with writing in rights
         if(!outFile) { // if file was not able to be created
             std::cerr << "There was an error, not able to provide the file!" << std::endl; // error
-            return; // end the get_data
+            return -1; // end the get_data
         }
 
         for(int i = 0; i < 15; i++){ // filling the new file with 0 for each seat.
@@ -25,7 +25,7 @@ void get_data(bool (&arr)[15][30], int arr2[2] = nullptr) { // taking a referenc
         file.open("SeatAvailability.txt", std::ios::in | std::ios::out); // open the file with reading and writing rights.
         if(!file){
             std::cerr << "Not able to open the file!!" << std::endl; // Error if we are not able to open the file.
-            return; // end the fuction.
+            return - 1; // end the fuction.
         }
     }
 
@@ -44,7 +44,7 @@ void get_data(bool (&arr)[15][30], int arr2[2] = nullptr) { // taking a referenc
         if (row < 0 || row >= 15 || col < 0 || col >= 30) {
             std:: cerr << "Invalid row or colum index!" << std::endl;
             file.close();
-            return;
+            return - 1;
         }
 
         arr[row][col] = 1;
@@ -53,7 +53,7 @@ void get_data(bool (&arr)[15][30], int arr2[2] = nullptr) { // taking a referenc
         std::ofstream outFile("SeatAvailability.txt", std::ios::trunc);
         if(!outFile){
             std::cerr << "Error opening the file for changing the value!" << std::endl;
-            return;
+            return - 1;
         }
 
         for(int i = 0; i < 15; i++){
@@ -67,6 +67,7 @@ void get_data(bool (&arr)[15][30], int arr2[2] = nullptr) { // taking a referenc
     } else {
         file.close();
     }
+    return 1;
 }
 
 int main(){

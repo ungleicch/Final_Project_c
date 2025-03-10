@@ -23,3 +23,4 @@ vendor/
 # Ignore environment and secrets
 .env
 config/secrets.yml
+.vscode/
