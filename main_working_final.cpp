@@ -124,19 +124,33 @@ int saveSeats(const bool seats[ROWS][COLS]){
 void displayChart(bool seats[ROWS][COLS]){
     std::cout << "\n\t\tSeats\n";
     //Display the column numbers
-    std::cout << "    \t";
-    for(int tens = 0; tens < 3; tens++) { //display tens digits
+    std::cout << "       \t ";
+    for(int tens = 0; tens < 1; tens++) { //display tens digits (1-9)
+        for(int ones = 1; ones < 10; ones++) {
+            std::cout << tens;
+        }
+    }
+    
+    for(int tens = 1; tens < 3; tens++) { //display tens digits (0-9)
         for(int ones = 0; ones < 10; ones++) {
             std::cout << tens;
         }
     }
+    std::cout << 3; //display the 3 for 30
 
-    std::cout << "\n    \t";
-    for(int tens = 0; tens < 3; tens++) { //display ones digits
+    std::cout << "\n     \t ";
+    for(int tens = 0; tens < 1; tens++) { //display ones digits (1-9)
+        for(int ones = 1; ones < 10; ones++) {
+            std::cout << ones;
+        }
+    }
+    
+    for(int tens = 1; tens < 3; tens++) { //display ones digits (0-9)
         for(int ones = 0; ones < 10; ones++) {
             std::cout << ones;
         }
     }
+    std::cout << 0; //display the 0 for 30
 
     std::cout << std::endl;
     for(int row = 0; row < ROWS; row++) { //display the chart
