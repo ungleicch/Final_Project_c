@@ -1,0 +1,38 @@
+//prototype for function
+double calculateRevenue(const std::string &filename, const int rowPrice[], int numRows);
+
+//function call in case 4 of menue
+rev = calculateRevenue("SeatAvailability.txt", rowPrice, 15);
+
+//function contents
+double calculateRevenue(const std::string &filename, const int rowPrice[], int numRows) 
+{
+    //open and check if file works
+    std::ifstream file(filename);
+    if (!file) 
+    {
+        std::cerr << "Error opening file!" << std::endl;
+        return -1;
+    }
+    
+    std::string line;
+    int rev = 0, row = 0;
+    
+    
+    while(getline(file, line) && row < numRows) 
+    {
+        int takenSeats = 0;
+        
+        for(int i = 0; i < line.length(); i++)
+        {
+        if (line[i] == '*')
+        {
+            takenSeats++;
+        }
+    }
+    rev += takenSeats * rowPrice[row];
+    row++;
+    }
+    return rev;
+}
+    
