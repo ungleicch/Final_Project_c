@@ -1,5 +1,8 @@
 // authors: Maxwell Furtwangler, Jack Heupel, Tom Malter
-//
+// Final Project
+// V.5
+// 13. March 25
+// Github: https://github.com/ungleicch/Final_Project_c
 #include <iostream>
 #include <fstream>
 
@@ -110,7 +113,7 @@ int loadSeats(bool seats[ROWS][COLS]){
 }
 
 int saveSeats(const bool seats[ROWS][COLS]){
-    std::ofstream outFile("SeatAvailability.txt", std::ios::trunc); // trunc clears file rewrites it    +++++
+    std::ofstream outFile("SeatAvailability.txt", std::ios::trunc); // trunc clears file rewrites it
     if (!outFile){ // file not able to read in, give error
         std::cerr << "Error opening the SeatAvailability file..." << std::endl;
         return -1;
@@ -177,8 +180,6 @@ void viewTicketPrices(const double rowPrice[ROWS]){
     for (int i = 0; i < ROWS; i++){ // prining all the prices
         std::cout << "Row " << i + 1 << ": $" << rowPrice[i] << std::endl;
     }
-
-
 }
 
 // is called to buy a ticket
